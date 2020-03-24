@@ -1,0 +1,8 @@
+<ngb-carousel class="h-100">
+  <ng-template ngbSlide *ngFor="let item of src">
+    <div class="container">
+      <img [src]="item.src" [alt]="item.alt" class="justify-content-center" />
+      <p>{{ test }}</p>
+    </div>
+  </ng-template>
+</ngb-carousel>
