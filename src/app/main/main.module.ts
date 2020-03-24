@@ -5,6 +5,8 @@ import { NavigationBarComponent } from "./components/navigation-bar/navigation-b
 import { SideNavigationComponent } from "./components/side-navigation/side-navigation.component";
 import { BodyComponent } from "./components/body/body.component";
 import { FooterComponent } from "./components/footer/footer.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -14,7 +16,7 @@ import { FooterComponent } from "./components/footer/footer.component";
     BodyComponent,
     FooterComponent
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, NgbModule, SharedModule],
   exports: [MainComponent]
 })
 export class MainModule {}
