@@ -1,33 +1,12 @@
 <div class="container">
   <div class="row" style="height: 100px; display:initial">
     <!-- Passing data-->
-    <div class="container" style="padding: 5px ;">
-      <app-carousel
-        [source]="[
-          { src: '../../../assets/emoji1.jpg', alt: 'a' },
-          { src: '../../../assets/emoji2.jpg', alt: 'a' }
-        ]"
-      ></app-carousel>
-    </div>
-    <div class="container" style="padding: 5px ;">
-      <app-carousel
-        [source]="[
-          { src: '../../../assets/emoji3.jpg', alt: 'a' },
-          { src: '../../../assets/emoji4.jpg', alt: 'a' },
-          { src: '../../../assets/emoji5.jpg', alt: 'a' },
-          { src: '../../../assets/emoji6.jpg', alt: 'a' }
-        ]"
-      ></app-carousel>
-    </div>
-
-    <div class="container" style="padding: 5px ;">
-      <app-carousel
-        [source]="[
-          { src: '../../../assets/emoji7.jpg', alt: 'a' },
-          { src: '../../../assets/emoji8.jpg', alt: 'a' },
-          { src: '../../../assets/emoji9.jpg', alt: 'a' }
-        ]"
-      ></app-carousel>
+    <div
+      class="container"
+      style="padding: 5px ;"
+      *ngFor="let item of carousels"
+    >
+      <app-carousel [source]="item"></app-carousel>
     </div>
   </div>
 </div>
