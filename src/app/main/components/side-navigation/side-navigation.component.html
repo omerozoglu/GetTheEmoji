@@ -6,7 +6,10 @@
       style="padding: 5px ;"
       *ngFor="let item of carousels"
     >
-      <app-carousel [source]="item"></app-carousel>
+      <app-carousel
+        [source]="item"
+        (slideid)="getSlideId($event)"
+      ></app-carousel>
     </div>
   </div>
 </div>
