@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { NgbCarouselConfig } from "@ng-bootstrap/ng-bootstrap";
+import { CarouselService } from "./carousel.service";
 
 @Component({
   selector: "app-carousel",
@@ -10,13 +11,29 @@ export class CarouselComponent implements OnInit {
   @Input("source")
   src: any = [];
 
-  constructor(config: NgbCarouselConfig) {
-    config.interval = 0;
-    config.wrap = true;
-    config.keyboard = false;
-    config.pauseOnHover = false;
-    config.showNavigationIndicators = false;
+  @Output("slideid")
+  slideID = new EventEmitter<string>();
+
+  currentSlide: any;
+
+  constructor(
+    private config: NgbCarouselConfig,
+    private carouselService: CarouselService
+  ) {
+    this.config.interval = 0;
+    this.config.wrap = true;
+    this.config.keyboard = false;
+    this.config.pauseOnHover = false;
+    this.config.showNavigationIndicators = false;
+  }
+  onSlideClicked(value: any) {
+    this.slideID.emit(value);
+    this.carouselService.currentSlide(value);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.carouselService.currentslide.subscribe(
+      slide => (this.currentSlide = slide)
+    );
+  }
 }

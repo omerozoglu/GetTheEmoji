@@ -1,14 +1,26 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-2 bg-primary">
-      <p>a</p>
-      <p>b</p>
-      <p>c</p>
+  <div class="row ">
+    <div class="container col-md-1 bg-light ">
+      <div class="row justify-content-center p-1">
+        <button type="button" class="btn" (click)="increase()">
+          <img src="../../../../assets/icons8-plus.svg" alt="plus" />
+        </button>
+      </div>
+      <div class="row justify-content-center p-1">
+        <button type="button" class="btn" (click)="decrease()">
+          <img src="../../../../assets/icons8-minus-24.png" alt="plus" />
+        </button>
+      </div>
+      <div class="row justify-content-center p-1">
+        <button type="button" class="btn" (click)="clear()">
+          <img src="../../../../assets/icons8-trash.svg" alt="plus" />
+        </button>
+      </div>
     </div>
-    <div class="col-md-8">b</div>
-    <div class="col-md-2 bg-primary">a</div>
+    <div class="col-md-9">b</div>
+    <div class="col-md-2 bg-light">a</div>
   </div>
   <div class="row">
     C
-</div>
+  </div>
 </div>
