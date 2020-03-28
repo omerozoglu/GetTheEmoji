@@ -8,9 +8,15 @@ import { CarouselService } from "./carousel.service";
   styleUrls: ["./carousel.component.scss"]
 })
 export class CarouselComponent implements OnInit {
+  /*
+   * Parent > child
+   */
   @Input("source")
   src: any = [];
 
+  /*
+   * Child > parent
+   */
   @Output("slideid")
   slideID = new EventEmitter<string>();
 

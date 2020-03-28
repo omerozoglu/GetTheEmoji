@@ -6,10 +6,10 @@ import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
 export class CarouselService {
   constructor() {}
 
-  private slideSource = new BehaviorSubject<any>("00");
+  private slideSource = new BehaviorSubject<any>(undefined);
   currentslide = this.slideSource.asObservable();
 
   currentSlide(slide: any) {
-    this.slideSource.next(slide.activeId);
+    this.slideSource.next(slide);
   }
 }
