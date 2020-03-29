@@ -1,15 +1,17 @@
 <div class="container">
-  <div class="row" style="height: 100px; display:initial">
-    <!-- Passing data-->
-    <div
-      class="container"
-      style="padding: 5px ;"
-      *ngFor="let item of carousels"
+  <div
+    *ngFor="let item of categories; trackBy: trackByFn"
+    class="row justify-content-center"
+  >
+    <button
+      type="button"
+      class="btn btn-default"
+      (click)="openCatImgs(item.catId)"
     >
-      <app-carousel
-        [source]="item"
-        (slideid)="getSlideId($event)"
-      ></app-carousel>
-    </div>
+      <div class="row">
+        <img [src]="getCatImg(item.catId)" alt="aa" />
+        <img src="../../../../assets/icons8-forward-50.png" alt="" />
+      </div>
+    </button>
   </div>
 </div>

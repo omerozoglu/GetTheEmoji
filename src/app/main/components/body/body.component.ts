@@ -1,18 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { CarouselService } from "src/app/shared/carousel/carousel.service";
-
+import { MockimgService } from "../../services/mockimg.service";
 @Component({
   selector: "app-body",
   templateUrl: "./body.component.html",
   styleUrls: ["./body.component.scss"]
 })
 export class BodyComponent implements OnInit {
-  constructor(private carouselService: CarouselService) {}
-  currentSlide: any;
-
+  constructor(private imgService: MockimgService) {}
+  img = [];
   ngOnInit() {
-    this.carouselService.currentslide.subscribe(slide => {
-      this.currentSlide = slide;
+    this.imgService.catID.subscribe(m => {
+      this.img = this.imgService.getImgs(m);
     });
   }
 

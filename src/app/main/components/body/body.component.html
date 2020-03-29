@@ -1,32 +1,6 @@
-<div class="container">
-  <div class="row ">
-    <div class="container col-md-1 bg-light ">
-      <div class="row justify-content-center p-1">
-        <button type="button" class="btn" (click)="increase()">
-          <img src="../../../../assets/icons8-plus.svg" alt="plus" />
-        </button>
-      </div>
-      <div class="row justify-content-center p-1">
-        <button type="button" class="btn" (click)="decrease()">
-          <img src="../../../../assets/icons8-minus-24.png" alt="plus" />
-        </button>
-      </div>
-      <div class="row justify-content-center p-1">
-        <button type="button" class="btn" (click)="clear()">
-          <img src="../../../../assets/icons8-trash.svg" alt="plus" />
-        </button>
-      </div>
-    </div>
-    <div class="col-md-9">
-      <div class="container">
-        <div class="row justify-content-center">
-          <img src="../../../../assets/baseemoji.png" alt="base emoji" />
-        </div>
-      </div>
-    </div>
-    <div class="col-md-2 bg-light">a</div>
-  </div>
-  <div class="row">
-    C
+<div class="row  ">
+  <!-- <img src="../../../../assets/baseemoji.png" alt="base emoji" /> -->
+  <div *ngFor="let item of img">
+    <button class="btn "><img [src]="item.src" alt="" /></button>
   </div>
 </div>
