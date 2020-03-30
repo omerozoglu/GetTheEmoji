@@ -7,6 +7,7 @@ import { MockimgService } from "../../services/mockimg.service";
 })
 export class BodyComponent implements OnInit {
   img = [];
+  currentCatId: number = 0;
   selectedImg = [];
   isSelection: boolean = false;
   isBody: boolean = true;
@@ -15,10 +16,15 @@ export class BodyComponent implements OnInit {
 
   ngOnInit() {
     this.imgService.catID.subscribe(m => {
-      this.img = this.imgService.getImgs(m);
-      if (m > 0) {
+      if (m > 0 && this.currentCatId != m) {
+        this.img = this.imgService.getImgs(m);
         this.isSelection = true;
         this.isBody = false;
+        this.currentCatId = m;
+      } else {
+        this.isSelection = false;
+        this.isBody = true;
+        this.currentCatId = 0;
       }
     });
 
