@@ -6,21 +6,57 @@ import { MockimgService } from "../../services/mockimg.service";
   styleUrls: ["./body.component.scss"]
 })
 export class BodyComponent implements OnInit {
-  constructor(private imgService: MockimgService) {}
   img = [];
+  selectedImg = [];
+  isSelection: boolean = false;
+  isBody: boolean = true;
+
+  constructor(private imgService: MockimgService) {}
+
   ngOnInit() {
     this.imgService.catID.subscribe(m => {
       this.img = this.imgService.getImgs(m);
+      if (m > 0) {
+        this.isSelection = true;
+        this.isBody = false;
+      }
     });
+
+    this.imgService.imgID.subscribe(m => {
+      if (m > 0) {
+        if (
+          !this.selectedImg.includes(this.imgService.getImgById(m)) &&
+          this.selectedImg.filter(
+            i => i.catId == this.imgService.getImgById(m).catId
+          ).length < 3 &&
+          this.selectedImg.length < 5
+        )
+          this.selectedImg.push(this.imgService.getImgById(m));
+        this.isSelection = false;
+        this.isBody = true;
+      }
+    });
+  }
+  setImgId(imgid) {
+    this.imgService.SetImgID(imgid);
+  }
+  nextBody() {
+    this.selectedImg.push({ imgId: 0, catId: 0, src: "" });
+    this.selectedImg.forEach(i => {
+      this.imgService.SetImgID(i.imgId);
+      console.log(i);
+    });
+  }
+
+  clearSelection() {
+    this.selectedImg = [];
   }
 
   increase() {
     console.log("increase");
   }
+
   decrease() {
     console.log("decrease");
-  }
-  clear() {
-    console.log("clean");
   }
 }

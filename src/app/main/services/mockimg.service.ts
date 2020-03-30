@@ -76,19 +76,40 @@ export class MockimgService {
       catId: 9,
       src:
         "../../../../assets/hands/icons8-backhand-index-pointing-right-emoji-50.png"
+    },
+    {
+      imgId: 14,
+      catId: 7,
+      src: "../../../../assets/hands/icons8-thumbs-down-emoji-50.png"
+    },
+    {
+      imgId: 15,
+      catId: 7,
+      src: "../../../../assets/hands/icons8-thumbs-down-emoji-50.png"
     }
   ];
 
   constructor() {}
 
-  getImgs(catId) {
+  getImgs(catId: number): any[] {
     return this.img.filter(i => i.catId == catId);
   }
 
-  private catid = new BehaviorSubject<number>(1);
+  getImgById(imgid: number): any {
+    return this.img.find(i => i.imgId == imgid);
+  }
+
+  private catid = new BehaviorSubject<number>(0);
   catID = this.catid.asObservable();
 
   SetCatID(catid: number): void {
     this.catid.next(catid);
+  }
+
+  private imgid = new BehaviorSubject<number>(0);
+  imgID = this.imgid.asObservable();
+
+  SetImgID(imgid: number): void {
+    this.imgid.next(imgid);
   }
 }

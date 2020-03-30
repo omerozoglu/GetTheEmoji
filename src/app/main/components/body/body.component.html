@@ -1,6 +1,38 @@
-<div class="row  ">
-  <!-- <img src="../../../../assets/baseemoji.png" alt="base emoji" /> -->
+<div *ngIf="isSelection" class="row">
   <div *ngFor="let item of img">
-    <button class="btn "><img [src]="item.src" alt="" /></button>
+    <button class="btn " (click)="setImgId(item.imgId)">
+      <img [src]="item.src" alt="" />
+    </button>
+  </div>
+</div>
+
+<div *ngIf="isBody">
+  <div class="content">
+    <div class="row m-0 justify-content-center ">
+      <div *ngFor="let item of selectedImg">
+        <button type="button" class="btn">
+          <img [src]="item.src" alt="" />
+        </button>
+      </div>
+    </div>
+    <div class="row  justify-content-center" style="margin-top:10%;">
+      <img src="../../../../assets/baseemoji.png" alt="base emoji" />
+    </div>
+    <div class="row m-0 p-0" style="justify-content: flex-end">
+      <button
+        (click)="clearSelection()"
+        type="button"
+        class=" btn btn-danger m-0 mr-1 "
+      >
+        TRASH
+      </button>
+      <button
+        (click)="saveSelection()"
+        type="button"
+        class=" btn btn-success m-0 "
+      >
+        SAVE
+      </button>
+    </div>
   </div>
 </div>
