@@ -6,33 +6,51 @@
   </div>
 </div>
 
-<div *ngIf="isBody">
-  <div class="content">
+<div #body *ngIf="isBody" style="visibility: visible;">
+  <div class="content" style="height:500px;">
     <div class="row m-0 justify-content-center ">
       <div *ngFor="let item of selectedImg">
-        <button type="button" class="btn">
-          <img [src]="item.src" alt="" />
+        <button (click)="currentImg(currentimg)" type="button" class="btn">
+          <img #currentimg [src]="item.src" alt="" />
         </button>
       </div>
     </div>
-    <div class="row  justify-content-center" style="margin-top:10%;">
-      <img src="../../../../assets/baseemoji.png" alt="base emoji" />
+    <div class="row  justify-content-center" style="margin-top:10%; ">
+      <canvas
+        #myCanvas
+        id="myCanvas"
+        width="356"
+        height="356"
+        style="border:2px solid black;   z-index: 1; position: absolute; background-image:url('../../../../assets/baseemoji.png'); background-repeat: no-repeat; background-position:center;"
+      ></canvas>
+
+      <div style="width: 360px; height:60px; z-index: 2; position:absolute;">
+        <div *ngFor="let y of emojiGridY" g class="row m-0">
+          <button
+            #gridButton
+            *ngFor="let x of emojiGridX"
+            (click)="setEmojiOnGrid(gridButton, myCanvas)"
+            class="md-2 btn"
+            style="height: 60px; width: 60px; border: 2px  solid black; border-right: 0; border-bottom: 0; background: none;"
+          ></button>
+        </div>
+      </div>
     </div>
-    <div class="row m-0 p-0" style="justify-content: flex-end">
-      <button
-        (click)="clearSelection()"
-        type="button"
-        class=" btn btn-danger m-0 mr-1 "
-      >
-        TRASH
-      </button>
-      <button
-        (click)="saveSelection()"
-        type="button"
-        class=" btn btn-success m-0 "
-      >
-        SAVE
-      </button>
-    </div>
+  </div>
+  <div class="row m-0 p-0" style="justify-content: flex-end">
+    <button
+      (click)="clearSelection()"
+      type="button"
+      class=" btn btn-danger m-0 mr-1 "
+    >
+      TRASH
+    </button>
+    <button
+      (click)="saveSelection()"
+      type="button"
+      class=" btn btn-success m-0 "
+    >
+      SAVE
+    </button>
   </div>
 </div>

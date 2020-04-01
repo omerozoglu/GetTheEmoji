@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { MockimgService } from "../../services/mockimg.service";
 @Component({
   selector: "app-body",
@@ -6,9 +6,18 @@ import { MockimgService } from "../../services/mockimg.service";
   styleUrls: ["./body.component.scss"]
 })
 export class BodyComponent implements OnInit {
+  @ViewChild("body") body: ElementRef;
+  @ViewChild("myCanvas") canvas: ElementRef;
+
   img = [];
-  currentCatId: number = 0;
   selectedImg = [];
+
+  emojiGridX: any[6] = [1, 2, 3, 4, 5, 6];
+  emojiGridY: any[6] = [1, 2, 3, 4, 5, 6];
+
+  currentimg: any;
+  currentCatId: number = 0;
+
   isSelection: boolean = false;
   isBody: boolean = true;
 
@@ -19,11 +28,14 @@ export class BodyComponent implements OnInit {
       if (m > 0 && this.currentCatId != m) {
         this.img = this.imgService.getImgs(m);
         this.isSelection = true;
-        this.isBody = false;
+        this.body.nativeElement.style.visibility = "hidden";
+        //this.isBody = false;
         this.currentCatId = m;
       } else {
         this.isSelection = false;
-        this.isBody = true;
+        if (this.body != undefined) {
+          this.body.nativeElement.style.visibility = "visible";
+        } else this.isBody = true;
         this.currentCatId = 0;
       }
     });
@@ -39,20 +51,21 @@ export class BodyComponent implements OnInit {
         )
           this.selectedImg.push(this.imgService.getImgById(m));
         this.isSelection = false;
-        this.isBody = true;
+        this.body.nativeElement.style.visibility = "visible";
       }
     });
   }
+
   setImgId(imgid) {
     this.imgService.SetImgID(imgid);
   }
-  nextBody() {
-    this.selectedImg.push({ imgId: 0, catId: 0, src: "" });
-    this.selectedImg.forEach(i => {
-      this.imgService.SetImgID(i.imgId);
-      console.log(i);
-    });
+
+  currentImg(img) {
+    this.currentimg = img;
+    console.log(img);
   }
+
+  saveSelection() {}
 
   clearSelection() {
     this.selectedImg = [];
@@ -64,5 +77,17 @@ export class BodyComponent implements OnInit {
 
   decrease() {
     console.log("decrease");
+  }
+  setEmojiOnGrid(button, canvas) {
+    let posX = button.getBoundingClientRect().x;
+    let posY = button.getBoundingClientRect().y;
+    let cnvsX = canvas.getBoundingClientRect().x;
+    let cnvsY = canvas.getBoundingClientRect().y;
+    let ctx = canvas.getContext("2d");
+    //ctx.fillText("TEST", posX - cnvsX, posY - cnvsY);
+    ctx.drawImage(this.currentimg, posX - cnvsX, posY - cnvsY);
+    console.log(posX + " " + posY);
+    console.log(cnvsX + " " + cnvsY);
+    console.log(this.currentimg);
   }
 }
